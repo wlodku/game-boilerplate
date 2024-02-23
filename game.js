@@ -7,19 +7,30 @@ canvas.height = 1000;
 const c = canvas.getContext('2d');
 const s = new Square();
 
-//logika sterująca wszystkimi obiektami w grze
+//Main logic
 function update() {
     s.update();
 }
 
-//przerysowujemy całe płótno
+//Redraw canvas
 function draw() {
     c.clearRect(0, 0, canvas.width, canvas.height);
     s.draw(c);
 }
 
-//pętla główna gry
-function mainLoop() {    
+let secondsPassed;
+let oldTimeStamp;
+let fps;
+
+//Main game loop
+function mainLoop(timeStamp) {        
+    secondsPassed = (timeStamp - oldTimeStamp) / 1000;
+    oldTimeStamp = timeStamp;
+
+    // Calculate fps
+    fps = Math.round(1 / secondsPassed);
+    console.log("FPS: " + fps);
+
     update();
     draw(c);
     requestAnimationFrame(mainLoop);

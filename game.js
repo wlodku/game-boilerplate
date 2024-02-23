@@ -17,3 +17,12 @@ function draw() {
     c.clearRect(0, 0, canvas.width, canvas.height);
     s.draw(c);
 }
+
+//pętla główna gry
+function mainLoop() {    
+    update();
+    draw(c);
+    requestAnimationFrame(mainLoop);
+}
+
+requestAnimationFrame(mainLoop);
